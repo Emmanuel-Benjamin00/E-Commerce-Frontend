@@ -1,0 +1,97 @@
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import {  getAllProducts } from "../features/products/productSlice";
+import Carousel from 'react-bootstrap/Carousel';
+import '../extras/extracss/Carousal.css';
+import { Container } from 'react-bootstrap';
+
+
+function Home() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  useEffect(() => {
+    getallProducts();
+  }, []);
+  const productState = useSelector((state) => state?.product?.product);
+  const { product } = productState;
+  const authState = useSelector((state) => state.auth);
+  const getallProducts = () => {
+    dispatch(getAllProducts());
+  };
+
+
+  useEffect(() => {
+    console.log("authState:", authState);
+    authState?.user === null && navigate("/login");
+  }, [authState]);
+
+  const [index, setIndex] = useState(0);
+
+  const handleSelect = (selectedIndex) => {
+    setIndex(selectedIndex);
+  };
+  return (
+    <>
+      <div className='mx-auto carousal'>
+        <Carousel activeIndex={index} onSelect={handleSelect} className='carousal-comp'>
+          {product && product.map((item, index) => {
+            if (item?.tags === "upcoming") {
+              return (
+                <Carousel.Item key={index} className='carousal-item'>
+                  <img
+                    className="d-block w-100"
+                    src={item?.images?.[0]?.url}
+                    alt={`Slide ${index + 1}`}
+                  />
+                  <Carousel.Caption>
+                    <h3>{item.caption}</h3>
+                    <p>{item.description}</p>
+                  </Carousel.Caption>
+                </Carousel.Item>
+              );
+            }
+          })}
+        </Carousel>
+      </div>
+
+      <Container className="featured-wrapper pt-5 px-4 home-wrapper-2">
+        <div className="row">
+          <div className="col-12">
+            <h3 className="section-heading">Featured Collection</h3>
+          </div>
+          {product &&
+            product?.map((item, index) => {
+              if (item?.tags === "feature") {
+                return (
+                  <div key={index} className="col-3 mb-5">
+                    <div className="product-card card position-relative">
+                      <Link
+                        to={`/product/${item._id}`}
+                        className="product-details"
+                      >
+                        <div className="product-image d-flex align-items-center">
+                          <img
+                            src={item?.images?.[0]?.url}
+                            className="img-fluid d-block mx-auto"
+                            alt="product-img"
+                            style={{ maxHeight: "100%", maxWidth: "100%" }}
+                          />
+                        </div>
+
+                        <h6 className="brand">{item?.brand?.title}</h6>
+                        <h5 className="product-title">{item?.title}</h5>
+                        <p className="Price fw-bold text-dark">$ {item?.price}</p>
+                      </Link>
+                    </div>
+                  </div>
+                );
+              }
+            })}
+        </div>
+      </Container>
+    </>
+  );
+}
+
+export default Home;
