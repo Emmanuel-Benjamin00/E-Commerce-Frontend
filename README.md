@@ -18,6 +18,11 @@ One of the key highlights of our ecommerce platform is the seamless integration 
 convenient checkout process. Upon clicking the checkout button, users are redirected to Razorpay's platform where they can complete their payment using various methods 
 including cards, net banking, and wallets. After successful payment, users are redirected back to our platform to view their order confirmation.
 
+## Razorpay Test Card Details:
+    Card Number - 5267 3181 8797 5449
+    Exp Date - Any Date above the present Date
+    CVV - Any three digit number
+
   ## Technologies Used
 
 - React
