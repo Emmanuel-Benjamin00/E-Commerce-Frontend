@@ -10,6 +10,7 @@ import '../extras/extracss/Cart.css'
 function Cart() {
   const dispatch = useDispatch();
   const userCartState = useSelector((state) => state?.auth?.cartProduct);
+  console.log(userCartState)
   useEffect(() => {
     dispatch(getUserCart());
   }, []);
@@ -45,6 +46,10 @@ function Cart() {
             </div>
             {userCartState &&
               userCartState?.map((item, index) => {
+                if (!item.productId) {
+                  console.error("Missing productId for item:", item);
+                  return null; // or handle the case appropriately
+                }
                 return (
                   <div
                     key={index}

@@ -332,11 +332,18 @@ function Checkout() {
                           >
                             {item?.quantity}
                           </span>
-                          <img
+                          {item?.productId?.images && item.productId.images[0]?.url && (
+                            <img
+                              src={item.productId.images[0].url}
+                              alt=""
+                              style={{ maxHeight: "100px", maxWidth: "100px" }}
+                            />
+                          )}
+                          {/* <img
                             src={item?.productId?.images[0].url}
                             alt=""
                             style={{ maxHeight: "100px", maxWidth: "100px" }}
-                          />
+                          /> */}
                         </div>
                         <h5 className="total-price ms-4" style={{ width: "100%" }}>
                           {item?.productId?.title}

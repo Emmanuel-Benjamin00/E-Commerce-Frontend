@@ -32,12 +32,28 @@ function OurStore() {
     let newBrands = [];
     let category = [];
     let newtags = [];
+    // for (let i = 0; i < product?.length; i++) {
+    //   const element = product?.[i];
+    //   newBrands.push(element.brand);
+    //   category.push(element.category);
+    //   newtags.push(element.tags);
+    // }
+    
     for (let i = 0; i < product?.length; i++) {
       const element = product?.[i];
-      newBrands.push(element.brand);
-      category.push(element.category);
-      newtags.push(element.tags);
+      if (element) {
+        if (element.brand) {
+          newBrands.push(element.brand);
+        }
+        if (element.category) {
+          category.push(element.category);
+        }
+        if (element.tags) {
+          newtags.push(element.tags);
+        }
+      }
     }
+
     const uniqueCategory = category.filter((obj, index) => {
       return index === category.findIndex((o) => obj._id === o._id);
     });
@@ -62,7 +78,7 @@ function OurStore() {
           <div className="col-12">
             <div className="filter-sort-grid mb-4">
               <div className="d-flex justify-content-between align-items-center">
-            
+
 
                 <div className="d-flex gap-10 align-items-center ms-auto">
                   <label className="totalproducts">
