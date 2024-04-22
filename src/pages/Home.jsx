@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {  getAllProducts } from "../features/products/productSlice";
 import Carousel from 'react-bootstrap/Carousel';
 import '../extras/extracss/Carousal.css';
-import { Container } from 'react-bootstrap';
+import { Container, Button} from 'react-bootstrap';
 
 
 function Home() {
@@ -88,7 +88,8 @@ function Home() {
                 );
               }
             })}
-        </div>
+            <Button style={{width:"fit-content"}} className="d-flex m-auto" onClick={()=>navigate("/product")}>See more Products</Button>
+        </div>    
       </Container>
     </>
   );
