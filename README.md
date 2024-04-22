@@ -28,7 +28,7 @@ including cards, net banking, and wallets. After successful payment, users are r
 
 ## Default User Credentials:
 
-  - **Email:**just@gmail.com
+  - **Email:** just@gmail.com
   - **Password:** 123456
 
     
