@@ -50,8 +50,8 @@ function Signup() {
     <>
       <Meta title={"Signup"} />
       <Container class1="login-wrapper home-wrapper-2 py-5">
-        <div className="row">
-          <div className="col-12">
+        <div className="row d-flex justify-content-center">
+          <div className="col-12 col-lg-5">
             <div className="auth-card">
               <h3 className="text-center mb-3">Sign-Up</h3>
               <form
@@ -131,7 +131,7 @@ function Signup() {
                 </div>
                 <div>
                   <div className="mt-3 d-flex justify-content-center gap-15 align-items-center">
-                    <button className="button prime-btn border-0">Create</button>
+                    <button className="button prime-btn border-0 btn btn-warning">Create</button>
                   </div>
                 </div>
               </form>

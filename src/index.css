@@ -45,10 +45,6 @@ a {
   display: inline-block;
 }
 
-.form-control:focus {
-  box-shadow: none;
-  border-color: inherit;
-}
 
 .gap-10 {
   gap: 10px;
@@ -301,13 +297,7 @@ a {
 
 
 /*Login */
-.auth-card {
-  padding: 20px;
-  background-color: white;
-  width: 500px;
-  margin: 30px auto;
-  border-radius: 10px;
-}
+
 
 .auth-card h3 {
   font-size: 19px;
@@ -479,10 +469,7 @@ a {
   font-size: 14px;
 }
 
-.header-icon {
-  width: 40px;
-  height: 40px;
-}
+
 
 .cat-drop-down-icon {
   width: 25px;
@@ -492,24 +479,6 @@ a {
 .service-icon {
   width: 35px;
   height: 35px;
-}
-
-.prime-btn {
-  background: #43648d;
-  color: white;
-  padding: 5px 22px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  border-radius: 12px;
-  font-weight: bold;
-}
-
-.prime-btn:not(:disabled):hover {
-  background: var(--color-232f3e);
-  color: white;
-  cursor: pointer;
 }
 
 .sec-btn {

@@ -4,7 +4,7 @@ import Container from "../components/Container";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getAProduct } from "../features/products/productSlice";
-
+import '../extras/extracss/Singleproduct.css';
 import { addProdToCart } from "../features/user/userSlice";
 
 import { Row, Col } from 'react-bootstrap'
@@ -61,16 +61,16 @@ function SingleProduct() {
     <>
       <Meta title={"Product Name"} />
       <Container>
-        <Row className="align-items-center my-5 mx-4 gap-3">
-          <Col xs={4} className='d-flex justify-content-center align-items-center'>
+        <Row className="align-items-center my-2 mx-4 gap-3">
+          <Col xs={12} lg={4} className='d-flex justify-content-center align-items-center'>
             <img
               src={productState?.images[0]?.url && productState.images[0].url}
               alt="product image"
-              style={{ width: '80%' }}
+              className="siImg"
             />
           </Col>
 
-          <Col xs={5} className='d-flex flex-column'>
+          <Col xs={12} lg={4} className='d-flex flex-column'>
             <div>
               <h4 className='mt-4 fw-bold'>
                 {productState?.title}
@@ -81,7 +81,7 @@ function SingleProduct() {
               Price: $ {productState?.price}
             </h6>
             <p style={{ fontSize: "0.8em" }}>Inclusive of all Taxes</p>
-            <hr className="w-100 mt-2" />
+            <hr className="w-100 mt-1" />
             <div>
               <div className="d-flex gap-10 align-items-center my-2">
                 <label className="product-heading">Type</label>
@@ -99,13 +99,22 @@ function SingleProduct() {
                   {productState?.category?.title}
                 </label>
               </div>
-              <div className="d-flex gap-10 align-items-center my-2">
+              {/* <div className="d-flex gap-10 align-items-center my-2">
                 <label className="product-heading">Tags</label>
                 <label className="product-data">{productState?.tags}</label>
-              </div>
+              </div> */}
               <div className="d-flex gap-10 align-items-center my-2">
                 <label className="product-heading">Avaiablity</label>
                 <label className="product-data">In Stock</label>
+              </div>
+            </div>
+            <hr />
+            <div className="row description">
+              <div>
+                <h6 className="fw-bold pt-2">Description</h6>
+                <div className="bg-white">
+                  <p className="text-justify">{productState?.description}</p>
+                </div>
               </div>
             </div>
           </Col>
@@ -135,7 +144,7 @@ function SingleProduct() {
             }
             <div>
               <button
-                className="button  prime-btn border-0 mb-4"
+                className="button btn btn-warning border-0 mb-4"
                 type="button"
                 onClick={() => {
                   alreadyAdded ? navigate("/cart") : uploadCart(productState?._id, quantity, productState?.price);
@@ -149,12 +158,12 @@ function SingleProduct() {
       </Container>
 
 
-      <Container class1="description-wrapper home-wrapper-2 px-5">
-        <div className="row">
-          <div className="col-12">
-            <h4>Description</h4>
-            <div className="bg-white p-3">
-              <p>{productState?.description}</p>
+      <Container className=" home-wrapper-2 px-5">
+        <div className="row description-wrapper px-5">
+          <div>
+            <h6 className="fw-bold">Description</h6>
+            <div className="bg-white">
+              <p className="text-justify">{productState?.description}</p>
             </div>
           </div>
         </div>

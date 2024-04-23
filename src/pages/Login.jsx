@@ -6,6 +6,7 @@ import * as Yup from "yup";
 import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../features/user/userSlice";
+import "../extras/extracss/Login.css"
 
 const loginSchema = Yup.object({
   email: Yup.string()
@@ -42,9 +43,9 @@ function Login() {
   return (
     <>
       <Meta title={"Login"} />
-      <Container class1="login-wrapper home-wrapper-2 py-5">
-        <div className="row">
-          <div className="col-12">
+      <Container class1="py-5 my-5">
+        <div className="row d-flex justify-content-center">
+          <div className="col-12 col-lg-5">
             <div className="auth-card">
               <h3 className="text-center mb-3">Login</h3>
               <form
@@ -52,12 +53,12 @@ function Login() {
                 onSubmit={formik.handleSubmit}
                 className="d-flex flex-column gap-15"
               >
-                <div>
+                <div className="login-box">
                   <input
                     type="email"
                     name="email"
                     placeholder="Email"
-                    className="form-control"
+                    className="form-control login-inp"
                     value={formik.values.email}
                     onChange={formik.handleChange("email")}
                     onBlur={formik.handleBlur("email")}
@@ -66,12 +67,12 @@ function Login() {
                     {formik.touched.email && formik.errors.email}
                   </div>
                 </div>
-                <div className="mt-1">
+                <div className="mt-1 login-box">
                   <input
                     type="password"
                     name="password"
-                    placeholder="password"
-                    className="form-control"
+                    placeholder="Password"
+                    className="form-control login-inp"
                     value={formik.values.password}
                     onChange={formik.handleChange("password")}
                     onBlur={formik.handleBlur("password")}
@@ -82,10 +83,10 @@ function Login() {
                 </div>
                 <div>
                   <div className="mt-3 d-flex justify-content-center gap-15 align-items-center">
-                    <button className="button border-0 prime-btn ">
+                    <button className="button border-0 btn btn-warning">
                       Login
                     </button>
-                    <Link to="/sign-up" className="button sec-btn signup ps-4">
+                    <Link to="/sign-up" className="button btn btn-secondary signup text-light">
                       SignUp
                     </Link>
                   </div>

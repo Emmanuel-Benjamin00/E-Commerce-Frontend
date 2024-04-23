@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getUserCart, deleteCartPoduct } from "../features/user/userSlice";
 import { Container } from 'react-bootstrap';
 import '../extras/extracss/Cart.css'
+import Table from 'react-bootstrap/Table';
 
 function Cart() {
   const dispatch = useDispatch();
@@ -35,7 +36,105 @@ function Cart() {
   return (
     <>
       <Meta title={"Cart"} />
-      <Container className="cart-wrapper home-wrapper-2 p-5 d-flex align-items-center">
+      <Container>
+        <Table responsive>
+          <thead>
+            <tr>
+              <th>S.No</th>
+              <th>Product</th>
+              <th>Price</th>
+              <th>Quantity</th>
+              <th>Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            {userCartState &&
+              userCartState?.map((item, index) => {
+                if (!item.productId) {
+                  console.error("Missing productId for item:", item);
+                  return null; // or handle the case appropriately
+                }
+                return (
+                  <tr key={index}>
+
+                    <td>{index+1}</td>
+
+                    <td className="d-flex align-items-center">
+                      <div className="">
+                        <img
+                          src={item?.productId.images?.[0]?.url}
+                          alt="watch"
+                          className="img-fluid"
+                          style={{ height: "60px" }}
+                        />
+                      </div>
+                      <div className="">
+                        <p>{item?.productId.title}</p>
+                      </div>
+                    </td>
+
+                    <td><h5 className="Price">$ {item?.productId.price}</h5></td>
+
+                    <td className="">
+                    <div className="d-flex align-items-center gap-2">
+                      <div>
+                        <input
+                          className="form-control"
+                          type="number"
+                          name=""
+                          id=""
+                          min={1}
+                          max={10}
+                          value={item?.quantity}
+                          disabled
+                        />
+                      </div>
+                      <div>
+                        {" "}
+                        <AiFillDelete
+                          onClick={() => {
+                            deleteACartProduct(item?._id);
+                          }}
+                          className="text-danger pointer"
+                        />
+                      </div>
+                      </div>
+                    </td>
+
+                    <td>
+                    <div className="cart-col-4">
+                      <h5 className="Price">
+                        $ {item?.quantity * item?.price}
+                      </h5>
+                    </div>
+                    </td>
+
+                  </tr>
+                )
+              })}
+          </tbody>
+        </Table>
+
+        <div className="col-12 py-2 mt-4">
+              <div className="d-flex justify-content-between align-items-baseline">
+                <Link to="/product" className="button prime-btn">
+                  Continue to Shopping
+                </Link>
+                {(totalAmount !== null || totalAmount !== 0) && (
+                  <div className="d-flex flex-column align-items-end">
+                    <h5> SubTotal :$ {totalAmount}</h5>
+                    <Link to="/checkout" className="button sec-btn">
+                      Checkout
+                    </Link>
+                  </div>
+                )}
+              </div>
+            </div>
+            
+      </Container>
+
+
+      {/* <Container className="cart-wrapper home-wrapper-2 p-5 d-flex align-items-center">
         <div className="row align-items-center">
           <div className="col-12">
             <div className="cart-header py-3 d-flex justify-content-between align-items-center">
@@ -118,7 +217,7 @@ function Cart() {
             </div>
           </div>
         </div>
-      </Container>
+      </Container> */}
     </>
   );
 }

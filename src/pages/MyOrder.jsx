@@ -17,7 +17,7 @@ function MyOrder() {
     <>
       <Container className="cart-wrapper home-wrapper-2 py-5">
       <h2 className='text-center my-4'> Order Details</h2>
-        <Table striped bordered hover>
+        <Table striped bordered hover responsive>
           <thead>
             <tr>
               <th>S.No</th>
@@ -36,7 +36,7 @@ function MyOrder() {
                       <td>{item?.createdAt?.split("T")?.[0]}</td>
                       <td>{item?._id}</td>
                       <td>{item?.orderItems?.length}</td>
-                      <td>$ {item?.totalPrice}</td>
+                      <td>$ {item?.totalPrice.toFixed(2)}</td>
                   </tr>
                 );
               })}

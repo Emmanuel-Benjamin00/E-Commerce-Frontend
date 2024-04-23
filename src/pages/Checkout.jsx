@@ -9,6 +9,7 @@ import { base_url, getConfig } from "../utils/axiosConfig";
 import { useDispatch, useSelector } from "react-redux";
 import { createAnOrder, deleteUserCart } from "../features/user/userSlice";
 import { toast } from "react-toastify";
+import "../extras/extracss/Checkout.css"
 
 const shippingSchema = Yup.object({
   firstname: Yup.string().required("FirstName is Required"),
@@ -177,7 +178,7 @@ function Checkout() {
       <Container class1="checkout-wrapper home-wrapper-2 p-5">
         <form onSubmit={formik.handleSubmit}>
           <div className="row">
-            <div className="col-6">
+            <div className="col-12 col-lg-6">
               <div className="checkout-left-data">
                 <h3 className="website-name mb-2">Shopper</h3>
                 <div className="d-flex gap-3">
@@ -316,7 +317,7 @@ function Checkout() {
               </div>
             </div>
 
-            <div className="col-6 mt-5">
+            <div className="col-12 mt-lg-5 col-lg-6">
               <div className="py-4">
                 {cartState &&
                   cartState?.map((item, index) => {
@@ -378,7 +379,7 @@ function Checkout() {
               </div>
               <div className="mt-3 d-flex justify-content-center gap-15 align-items-center">
                 <button
-                  className="button border-0 prime-btn"
+                  className="button border-0 placeorder-btn"
                   disabled={!(formik.dirty && formik.isValid)}
                   type="submit"
                 >

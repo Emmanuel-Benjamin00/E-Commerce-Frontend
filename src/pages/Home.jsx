@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {  getAllProducts } from "../features/products/productSlice";
 import Carousel from 'react-bootstrap/Carousel';
-import '../extras/extracss/Carousal.css';
+import '../extras/extracss/Home.css';
 import { Container, Button} from 'react-bootstrap';
 
 
@@ -40,7 +40,7 @@ function Home() {
               return (
                 <Carousel.Item key={index} className='carousal-item'>
                   <img
-                    className="d-block w-100"
+                    className="d-block"
                     src={item?.images?.[0]?.url}
                     alt={`Slide ${index + 1}`}
                   />
@@ -64,7 +64,7 @@ function Home() {
             product?.map((item, index) => {
               if (item?.tags === "feature") {
                 return (
-                  <div key={index} className="col-3 mb-5">
+                  <div key={index} className="col-6 col-lg-3 mb-5">
                     <div className="product-card card position-relative">
                       <Link
                         to={`/product/${item._id}`}
@@ -73,7 +73,7 @@ function Home() {
                         <div className="product-image d-flex align-items-center">
                           <img
                             src={item?.images?.[0]?.url}
-                            className="img-fluid d-block mx-auto"
+                            className="img-fluid d-block mx-auto featured-img"
                             alt="product-img"
                             style={{ maxHeight: "100%", maxWidth: "100%" }}
                           />

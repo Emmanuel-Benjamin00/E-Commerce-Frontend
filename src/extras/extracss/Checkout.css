@@ -1,0 +1,17 @@
+.placeorder-btn {
+    background: #43648d;
+    color: white;
+    padding: 5px 22px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 12px;
+    font-weight: bold;
+  }
+  
+  .placeorder-btn:not(:disabled):hover {
+    background: var(--color-232f3e);
+    color: white;
+    cursor: pointer;
+  }

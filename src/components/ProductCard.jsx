@@ -16,24 +16,26 @@ function ProductCard(props) {
               className={`${location.pathname == "/product" ? `gr-${grid}` : "col-3"
                 }`}
             >
-              <div className="product-card card position-relative mb-3">
-                <div className="product-image">
-                  <img
-                    src={item?.images?.[0]?.url}
-                    className="img-fluid d-block mx-auto p-3"
-                    alt="product-img"
-                    style={{maxHeight:"100%", maxWidth:"100%"}}
-                  />
-                </div>
-                <Link
-                  to={`${location.pathname == "/"
+              <Link
+                to={`${location.pathname == "/"
+                  ? `/product/${item._id}`
+                  : location.pathname == `/product/${item._id}`
                     ? `/product/${item._id}`
-                    : location.pathname == `/product/${item._id}`
-                      ? `/product/${item._id}`
-                      : `${item._id}`
-                    }`}
-                  className="product-details"
-                >
+                    : `${item._id}`
+                  }`}
+                className="product-details"
+              >
+                <div className="product-card card position-relative mb-3">
+
+                  <div className="product-image">
+                    <img
+                      src={item?.images?.[0]?.url}
+                      className="img-fluid d-block mx-auto p-3"
+                      alt="product-img"
+                      style={{ maxHeight: "100%", maxWidth: "100%" }}
+                    />
+                  </div>
+
                   <h6 className="brand">{item?.brand?.title}</h6>
                   <h5 className="product-title">{item?.title}</h5>
                   <p
@@ -43,8 +45,9 @@ function ProductCard(props) {
                     {item?.description}
                   </p>
                   <p className="Price fw-bold text-dark">$ {item?.price}</p>
-                </Link>
-              </div>
+
+                </div>
+              </Link>
             </div>
           );
         }

@@ -1,0 +1,24 @@
+.carousal img {
+    height: 85vh;
+    width: 100vw !important;
+}
+
+.featured-img{
+    max-height: 170px !important;
+}
+
+
+@media (max-width: 767px) {
+    .carousal img {
+        height: 100%;
+        width: 100vw !important;
+    }  
+    
+    .carousal-item{
+        height: 25vh;
+    }
+  }
+
+
+
+

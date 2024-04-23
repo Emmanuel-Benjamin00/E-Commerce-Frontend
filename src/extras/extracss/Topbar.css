@@ -20,3 +20,25 @@
     text-decoration: none !important;
 }
 
+.loginbutton {
+    font-size: 13px;
+}
+
+.header-icon-login {
+    width: 35px;
+    height: 35px;
+}
+
+.header-icon {
+    width: 30px;
+    height: 30px;
+}
+
+.cartletter {
+    font-size: 12px;
+}
+
+
+.navtext * {
+    color: black !important;
+}

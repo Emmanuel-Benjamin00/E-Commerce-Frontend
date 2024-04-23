@@ -1,5 +1,5 @@
-import React, { useEffect, useState} from "react";
-import {  Link, useNavigate } from "react-router-dom";
+import React, { useEffect, useRef, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { BsCart4 } from "react-icons/bs";
 import { BiUserCircle } from "react-icons/bi";
 import { useDispatch, useSelector } from "react-redux";
@@ -7,6 +7,12 @@ import { auth_reset } from "../features/user/userSlice.js";
 import '../extras/extracss/Topbar.css'
 import Logo from "../extras/mini components/Logo/Logo.jsx";
 import { Dropdown } from "react-bootstrap";
+import Button from 'react-bootstrap/Button';
+import Container from 'react-bootstrap/Container';
+import Form from 'react-bootstrap/Form';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+import NavDropdown from 'react-bootstrap/NavDropdown';
 
 function Header() {
   const [total, setTotal] = useState(null);
@@ -38,9 +44,76 @@ function Header() {
   useEffect(() => {
     setUser(authState?.user);
   }, [authState]);
+
+  const navbarRef = useRef();
+
+  const collapseIt = () => {
+    setTimeout(()=>{
+
+      navbarRef.current.click();
+    }, 100)
+  }
   return (
     <>
-      <header className="py-3 border-bottom">
+      <Navbar expand="lg" className="">
+        <Container>
+          <Navbar.Brand href="#"><Logo /></Navbar.Brand>
+          <Navbar.Toggle aria-controls="responsive-navbar-nav" ref={navbarRef}/>
+          <Navbar.Collapse id="responsive-navbar-nav">
+            <Nav className="ms-auto my-2 my-lg-0 d-flex align-items-center gap-2 navtext">
+              <Nav.Link onClick={() => navigate('/')} onTouchEnd={()=>collapseIt()}>
+                {
+                  user ? "Home" : "Login"
+                }
+              </Nav.Link>
+              <Nav.Link onClick={() => navigate('/product')} onTouchEnd={()=>collapseIt()}>All Products</Nav.Link>
+              {
+                user && (
+                  <Nav.Link onClick={() => navigate('/myorders')} onTouchEnd={()=>collapseIt()}>My Orders</Nav.Link>
+                )
+              }
+              {
+              user && (
+              <Nav.Link onClick={() => navigate('/cart')} className="d-flex flex-column justify-content-center align-items-center" onTouchEnd={()=>collapseIt()}>
+                <BsCart4 className="header-icon m-0 p-0 gap-0" />
+                <div className="m-0 p-0 cartletter">Cart</div>
+              </Nav.Link>
+              )
+              }
+              {
+              user && (
+              <Dropdown align="end">
+                <Dropdown.Toggle variant="link" id="dropdown-basic" drop="down" className="acc-btn custom-dropdown-toggle">
+                  <div className="d-flex align-items-center gap-20 text-dark">
+                    <BiUserCircle className="header-icon-login m-0 p-0 "/>
+                    {user === null ? (
+                      <p className="mb-0  loginbutton">
+                        Log in <br /> My Account
+                      </p>
+                    ) : (
+                      <p className="mb-0 loginbutton">
+                        Welcome <br /> {user?.firstname}
+                      </p>
+                    )}
+                  </div>
+                </Dropdown.Toggle>
+                {
+              user && (
+                <Dropdown.Menu>
+                  <Dropdown.Item onClick={() => handleLogout()} onTouchEnd={()=>collapseIt()}>Logout</Dropdown.Item>
+                </Dropdown.Menu>
+              )
+                }
+              </Dropdown>
+              )}
+
+            </Nav>
+          </Navbar.Collapse>
+        </Container>
+      </Navbar>
+
+
+      {/* <header className="py-3 border-bottom">
         <div className="container d-flex flex-wrap justify-content-between align-items-center">
           <Logo />
           <ul className="nav  d-flex align-items-center gap-2">
@@ -68,9 +141,10 @@ function Header() {
                 <li className="nav-item">
                   <Link
                     to="/cart"
-                    className="d-flex align-items-center gap-10 text-dark"
+                    className="d-flex align-items-center text-dark flex-column"
                   >
-                    <BsCart4 className="header-icon" />
+                    <BsCart4 className="header-icon m-0 p-0 gap-0" />
+                    <div className="m-0 p-0 cartletter">Cart</div>
                   </Link>
                 </li>
               )
@@ -80,32 +154,28 @@ function Header() {
               <div>
                 <Dropdown align="end">
                   <Dropdown.Toggle variant="link" id="dropdown-basic" drop="down" className=" acc-btn custom-dropdown-toggle">
-                    <div className="d-flex align-items-center gap-10 text-dark">
-                      <BiUserCircle className="header-icon" />
+                    <div className="d-flex align-items-center gap-20 text-dark">
+                      <BiUserCircle className="header-icon m-0 p-0" />
                       {user === null ? (
                         <p className="mb-0">
                           Log in <br /> My Account
                         </p>
                       ) : (
-                        <p className="mb-0">
+                        <p className="mb-0 loginbutton">
                           Welcome <br /> {user?.firstname}
                         </p>
                       )}
                     </div>
                   </Dropdown.Toggle>
-
                   <Dropdown.Menu>
                     <Dropdown.Item onClick={() => handleLogout()}>Logout</Dropdown.Item>
                   </Dropdown.Menu>
                 </Dropdown>
-
-
-
               </div>
             </li>
           </ul>
         </div>
-      </header>
+      </header> */}
     </>
   );
 }
