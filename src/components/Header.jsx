@@ -4,6 +4,7 @@ import { BsCart4 } from "react-icons/bs";
 import { BiUserCircle } from "react-icons/bi";
 import { useDispatch, useSelector } from "react-redux";
 import { auth_reset } from "../features/user/userSlice.js";
+import { search_reset } from "../features/products/productSlice.js";
 import '../extras/extracss/Topbar.css'
 import Logo from "../extras/mini components/Logo/Logo.jsx";
 import { Dropdown } from "react-bootstrap";
@@ -53,11 +54,23 @@ function Header() {
       navbarRef.current.click();
     }, 100)
   }
+
+  const handleSearch = (e) => {
+    const value = e.target.value;
+    dispatch(search_reset(value));
+    navigate("/product"); // navigate to product page
+  };
   return (
     <>
       <Navbar expand="lg" className="">
         <Container>
           <Navbar.Brand href="#"><Logo /></Navbar.Brand>
+          <Form>
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+              <Form.Label>Search</Form.Label>
+              <Form.Control type="text" placeholder="Search Something..." onChange={handleSearch}/>
+            </Form.Group>
+          </Form>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" ref={navbarRef}/>
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="ms-auto my-2 my-lg-0 d-flex align-items-center gap-2 navtext">

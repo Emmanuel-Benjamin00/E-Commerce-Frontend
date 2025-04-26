@@ -40,6 +40,7 @@ const productState = {
   isSuccess: false,
   isLoading: false,
   message: "",
+  search:""
 };
 export const productSlice = createSlice({
   name: "product",
@@ -47,6 +48,9 @@ export const productSlice = createSlice({
   reducers: {
     product_reset :(state,action)=>{
       state.product = undefined
+    },
+    search_reset :(state, action)=>{
+      state.search = action.payload
     }
   },
   extraReducers: (builder) => {
@@ -101,5 +105,5 @@ export const productSlice = createSlice({
   },
 });
 
-export const {product_reset} = productSlice.actions
+export const {product_reset, search_reset} = productSlice.actions
 export default productSlice.reducer;

@@ -1,14 +1,29 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 
 function ProductCard(props) {
   let location = useLocation();
 
   const { grid, data } = props;
-  console.log("data:", data);
+  const searchVal = useSelector((state) => state.product.search);
+  let [productData, setProductData] = useState(data)
+
+  useEffect(() => {
+    if (searchVal) {
+      const filtered = data?.filter((item) =>
+        item?.title?.toLowerCase().includes(searchVal.toLowerCase())
+      );
+      setProductData(filtered);
+    } else {
+      setProductData(data); // Reset to full list if search is cleared
+    }
+  }, [searchVal, data]);
+  
+  console.log("data:", searchVal);
   return (
     <>
-      {data?.map((item, index) => {
+      {productData?.map((item, index) => {
         if (item?.tags !== "upcoming") {
           return (
             <div
