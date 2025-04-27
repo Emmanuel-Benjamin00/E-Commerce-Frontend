@@ -20,7 +20,7 @@ function Footer() {
             <div className="row">
               <div className="col-12">
                 <p className="text-center mb-0 text-white">
-                  &copy; 2025 Designed and Developed by Felicia
+                  &copy; 2025 Copyright - All Rights Reserved
                 </p>
               </div>
             </div>

@@ -95,45 +95,6 @@ function OurStore() {
         <div className="row">
           <h3 className="text-center fw-bold text-underline">All Products</h3>
           <div className="col-12">
-            {/* <div className="filter-sort-grid mb-4">
-              <div className="d-flex justify-content-between align-items-center">
-                <div className="d-flex gap-10 align-items-center ms-auto">
-                  <label className="totalproducts">
-                    {product ? product.length-3 : 0} Products
-                  </label>
-                  <div className="d-flex gap-10 align-items-center grid">
-                    <div className="grid-div pointer">
-                      <CiGrid41
-                        onClick={() => {
-                          setGrid(3);
-                        }}
-                      />
-                    </div>
-                    <div className="grid-div pointer">
-                      <CiGrid31
-                        onClick={() => {
-                          setGrid(4);
-                        }}
-                      />
-                    </div>
-                    <div className="grid-div pointer">
-                      <CiGrid2V
-                        onClick={() => {
-                          setGrid(6);
-                        }}
-                      />
-                    </div>
-                    <div className="grid-div pointer">
-                      <MdCheckBoxOutlineBlank
-                        onClick={() => {
-                          setGrid(12);
-                        }}
-                      />
-                    </div>{" "}
-                  </div>
-                </div>
-              </div>
-            </div> */}
             <div className="products-list pb-5 mt-4">
               <div className="d-flex flex-wrap">
                 <ProductCard data={product ? product : []} grid={grid} />
