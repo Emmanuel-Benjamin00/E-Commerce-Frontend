@@ -7,6 +7,7 @@ import { getUserCart, deleteCartPoduct } from "../features/user/userSlice";
 import { Container } from 'react-bootstrap';
 import '../extras/extracss/Cart.css'
 import Table from 'react-bootstrap/Table';
+import {colors} from '../theme.js'
 
 function Cart() {
   const dispatch = useDispatch();
@@ -36,102 +37,94 @@ function Cart() {
   return (
     <>
       <Meta title={"Cart"} />
-      <Container>
-        <Table responsive>
-          <thead>
-            <tr>
-              <th>S.No</th>
-              <th>Product</th>
-              <th>Price</th>
-              <th>Quantity</th>
-              <th>Total</th>
+     
+      <div className="pt-5" style={{minHeight:'90vh', backgroundColor:colors.body }}>
+      <Container fluid className="px-5">
+        <Table responsive  style={{minHeight:'60vh', backgroundColor:colors.bod }}>
+          <thead style={{backgroundColor:colors.body}}>
+            <tr style={{backgroundColor:colors.body}}>
+              <th style={{backgroundColor:colors.body}}>S.No</th>
+              <th style={{backgroundColor:colors.body}}>Product</th>
+              <th style={{backgroundColor:colors.body}}>Price</th>
+              <th style={{backgroundColor:colors.body}}>Quantity</th>
+              <th style={{backgroundColor:colors.body}}>Total</th>
             </tr>
           </thead>
-          <tbody>
-            {userCartState &&
-              userCartState?.map((item, index) => {
-                if (!item.productId) {
-                  console.error("Missing productId for item:", item);
-                  return null; // or handle the case appropriately
-                }
-                return (
-                  <tr key={index}>
+          <tbody  style={{backgroundColor:colors.body}}>
+  {userCartState && userCartState.length > 0 ? (
+    userCartState.map((item, index) => {
+      if (!item.productId) {
+        console.error("Missing productId for item:", item);
+        return null;
+      }
+      return (
+        <tr key={index}  style={{backgroundColor:colors.body}}>
+          <td  style={{backgroundColor:colors.body}}>{index + 1}</td>
+          <td className="d-flex align-items-center"  style={{backgroundColor:colors.body}}>
+            <div>
+              <img
+                src={item?.productId.images?.[0]?.url}
+                alt="product"
+                className="img-fluid"
+                style={{ height: "60px" }}
+              />
+            </div>
+            <div>
+              <p>{item?.productId.title}</p>
+            </div>
+          </td>
+          <td  style={{backgroundColor:colors.body}}><h5 className="Price">$ {item?.productId.price}</h5></td>
+          <td  style={{backgroundColor:colors.body}}>
+            <div className="d-flex align-items-center gap-2">
+              <input
+                className="form-control"
+                type="number"
+                min={1}
+                max={10}
+                value={item?.quantity}
+                disabled
+              />
+              <AiFillDelete
+                onClick={() => deleteACartProduct(item?._id)}
+                className="text-danger pointer"
+              />
+            </div>
+          </td>
+          <td  style={{backgroundColor:colors.body}}>
+            <h5 className="Price">$ {item?.quantity * item?.price}</h5>
+          </td>
+        </tr>
+      );
+    })
+  ) : (
+    <tr>
+      <td colSpan="5" className="text-center py-5">
+        <h4>No products in cart</h4>
+      </td>
+    </tr>
+  )}
+</tbody>
 
-                    <td>{index+1}</td>
-
-                    <td className="d-flex align-items-center">
-                      <div className="">
-                        <img
-                          src={item?.productId.images?.[0]?.url}
-                          alt="watch"
-                          className="img-fluid"
-                          style={{ height: "60px" }}
-                        />
-                      </div>
-                      <div className="">
-                        <p>{item?.productId.title}</p>
-                      </div>
-                    </td>
-
-                    <td><h5 className="Price">$ {item?.productId.price}</h5></td>
-
-                    <td className="">
-                    <div className="d-flex align-items-center gap-2">
-                      <div>
-                        <input
-                          className="form-control"
-                          type="number"
-                          name=""
-                          id=""
-                          min={1}
-                          max={10}
-                          value={item?.quantity}
-                          disabled
-                        />
-                      </div>
-                      <div>
-                        {" "}
-                        <AiFillDelete
-                          onClick={() => {
-                            deleteACartProduct(item?._id);
-                          }}
-                          className="text-danger pointer"
-                        />
-                      </div>
-                      </div>
-                    </td>
-
-                    <td>
-                    <div className="cart-col-4">
-                      <h5 className="Price">
-                        $ {item?.quantity * item?.price}
-                      </h5>
-                    </div>
-                    </td>
-
-                  </tr>
-                )
-              })}
-          </tbody>
         </Table>
 
-        <div className="col-12 py-2 mt-4">
-              <div className="d-flex justify-content-between align-items-baseline">
-                <Link to="/product" className="button prime-btn">
-                  Continue to Shopping
-                </Link>
-                {(totalAmount !== null || totalAmount !== 0) && (
-                  <div className="d-flex flex-column align-items-end">
-                    <h5> SubTotal :$ {totalAmount}</h5>
-                    <Link to="/checkout" className="button sec-btn">
-                      Checkout
-                    </Link>
-                  </div>
-                )}
+          <div className="col-12 py-2 mt-4">
+                <div className="d-flex justify-content-between align-items-baseline">
+                  <Link to="/product" className="button prime-btn">
+                    Continue to Shopping
+                  </Link>
+                  {(totalAmount !== null || totalAmount !== 0) && (
+                    <div className="d-flex flex-column align-items-end">
+                      <h5> SubTotal :$ {totalAmount}</h5>
+                      <Link to="/checkout" className="button sec-btn">
+                        Checkout
+                      </Link>
+                    </div>
+                  )}
+                </div>
               </div>
+              </Container>
             </div>
-            
-      </Container>
+
 
 
       {/* <Container className="cart-wrapper home-wrapper-2 p-5 d-flex align-items-center">

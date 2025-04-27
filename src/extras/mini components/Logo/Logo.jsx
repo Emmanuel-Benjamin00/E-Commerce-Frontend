@@ -1,6 +1,6 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-import logo from "../../mini-images/Topbar/images/pngwing.com.png";
+import logo from "../../../../assets/logo.png";
 
 
 function Logo() {
@@ -14,10 +14,20 @@ function Logo() {
                     <img
                         src={logo}
                         alt=""
-                        style={{ width: "40px", height: "32px" }}
+                        style={{ width: "50px" }}
                         className="me-3"
                     />
-                    <span className="fs-4" onClick={() => navigate("/")}>Shopper</span>
+                    <span
+                        className="fs-2"
+                        style={{
+                            fontFamily: '"Playwrite RO", cursive',
+                            fontOpticalSizing: 'auto',
+                            fontWeight: '800', // or use a numeric value like 400, 500, etc.
+                            fontStyle: 'normal'
+                        }}
+                        onClick={() => navigate("/")}>
+                        Auraluxe
+                    </span>                       
                 </a>
             </div>
         </>

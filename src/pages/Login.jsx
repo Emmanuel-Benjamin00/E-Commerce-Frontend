@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Meta from "../components/Meta";
 import { Link, useNavigate } from "react-router-dom";
 import Container from "../components/Container";
@@ -7,6 +7,7 @@ import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../features/user/userSlice";
 import "../extras/extracss/Login.css"
+import { Image } from "react-bootstrap";
 
 const loginSchema = Yup.object({
   email: Yup.string()
@@ -27,6 +28,7 @@ function Login() {
       password: "",
     },
     onSubmit: (values) => {
+      setLoading(true); // Set loading to true when submitting the form
       dispatch(loginUser(values));
     },
     validationSchema: loginSchema,
@@ -40,14 +42,24 @@ function Login() {
     }
   }, [authState]);
 
+  const [loading, setLoading] = useState(false);
+
   return (
     <>
       <Meta title={"Login"} />
-      <Container class1="py-5 my-5">
-        <div className="row d-flex justify-content-center">
+      <Container class1="" >
+        <div className="row d-flex justify-content-center align-items-center" style={{height:'80vh'}}>
           <div className="col-12 col-lg-5">
-            <div className="auth-card">
-              <h3 className="text-center mb-3">Login</h3>
+    
+            <div className="auth-card" style={{display:'flex', flexDirection:'column', justifyContent:'center', alignItems:'center' }}>
+              <h3 className="text-center mb-3 fw-bold fs-2" style={{color:"black"}}>Login</h3>
+              <Image 
+              src="../../assets/pexels-polina-kovaleva-5420491.jpg" 
+              alt="Description of image" 
+              rounded 
+              fluid // makes the image responsive
+              style={{ maxWidth: '60%', marginBottom:'50px' }} 
+            />
               <form
                 action=""
                 onSubmit={formik.handleSubmit}
@@ -62,6 +74,7 @@ function Login() {
                     value={formik.values.email}
                     onChange={formik.handleChange("email")}
                     onBlur={formik.handleBlur("email")}
+                    style={{ backgroundColor: 'white', width:'30vw',  color: 'black', }}
                   />
                   <div className="error">
                     {formik.touched.email && formik.errors.email}
@@ -76,6 +89,7 @@ function Login() {
                     value={formik.values.password}
                     onChange={formik.handleChange("password")}
                     onBlur={formik.handleBlur("password")}
+                    style={{ backgroundColor: 'white',  color: 'black', width:'30vw' }}
                   />
                   <div className="error">
                     {formik.touched.password && formik.errors.password}
@@ -83,12 +97,20 @@ function Login() {
                 </div>
                 <div>
                   <div className="mt-3 d-flex justify-content-center gap-15 align-items-center">
-                    <button className="button border-0 btn btn-warning">
-                      Login
-                    </button>
-                    <Link to="/sign-up" className="button btn btn-secondary signup text-light">
+                    {loading ? (
+                      <div className="spinner-border text-warning" role="status">
+                        <span className="visually-hidden">Loading...</span>
+                      </div>
+                    ) : (
+                      <>
+                      <button className="button border-0 btn btn-warning">
+                        Login
+                      </button>
+                      <Link to="/sign-up" className="button btn btn-secondary signup text-light">
                       SignUp
                     </Link>
+                    </>
+                    )}
                   </div>
                 </div>
               </form>

@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAProduct } from "../features/products/productSlice";
 import '../extras/extracss/Singleproduct.css';
 import { addProdToCart } from "../features/user/userSlice";
+import {colors} from '../theme.js'
 
 import { Row, Col } from 'react-bootstrap'
 
@@ -60,8 +61,9 @@ function SingleProduct() {
   return (
     <>
       <Meta title={"Product Name"} />
+      <div className='pt-5' style={{backgroundColor:colors.body, minHeight:'90vh'}}>
       <Container>
-        <Row className="align-items-center my-2 mx-4 gap-3">
+        <Row className="align-items-center py-2 mx-4 gap-3">
           <Col xs={12} lg={4} className='d-flex justify-content-center align-items-center'>
             <img
               src={productState?.images[0]?.url && productState.images[0].url}
@@ -158,16 +160,17 @@ function SingleProduct() {
       </Container>
 
 
-      <Container className=" home-wrapper-2 px-5">
-        <div className="row description-wrapper px-5">
+      <Container className=" home-wrapper-2 px-5 ">
+        <div className="row description-wrapper px-5 mt-4">
           <div>
-            <h6 className="fw-bold">Description</h6>
+            <h6 className="fw-bold fs-3">Description</h6>
             <div className="bg-white">
-              <p className="text-justify">{productState?.description}</p>
+              <p className="text-justify fs-5"  style={{backgroundColor:colors.body}}>{productState?.description}</p>
             </div>
           </div>
         </div>
       </Container>
+      </div>
     </>
   );
 }

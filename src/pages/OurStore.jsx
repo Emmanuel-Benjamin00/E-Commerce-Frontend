@@ -93,9 +93,9 @@ function OurStore() {
       <Meta title={"Our Store"} />
       <Container class1="store-wrapper home-wrapper-2 py-5">
         <div className="row">
-          <h3 className="text-center">All Products</h3>
+          <h3 className="text-center fw-bold text-underline">All Products</h3>
           <div className="col-12">
-            <div className="filter-sort-grid mb-4">
+            {/* <div className="filter-sort-grid mb-4">
               <div className="d-flex justify-content-between align-items-center">
                 <div className="d-flex gap-10 align-items-center ms-auto">
                   <label className="totalproducts">
@@ -133,9 +133,9 @@ function OurStore() {
                   </div>
                 </div>
               </div>
-            </div>
+            </div> */}
             <div className="products-list pb-5 mt-4">
-              <div className="d-flex gap-10 flex-wrap">
+              <div className="d-flex flex-wrap">
                 <ProductCard data={product ? product : []} grid={grid} />
               </div>
             </div>

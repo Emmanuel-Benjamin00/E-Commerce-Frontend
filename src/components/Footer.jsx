@@ -7,6 +7,31 @@ import { BsSendArrowUp } from "react-icons/bs";
 function Footer() {
   return (
     <>
+      <div class="py-5" style={{backgroundColor:'black', position:"relative", bottom:0}}>
+        <footer class="d-flex flex-wrap justify-content-between align-items-center " >
+          {/* <div class="col-md-4 d-flex align-items-center">
+            <a href="/" class="mb-3 me-2 mb-md-0 text-body-secondary text-decoration-none lh-1" aria-label="Bootstrap">
+              <svg class="bi" width="30" height="24" aria-hidden="true"><use xlink:href="#bootstrap"></use></svg>
+            </a>
+            <span class="mb-3 mb-md-0 "  style={{color:"white"}}>© 2025 Company, Inc</span>
+          </div> */}
+
+          <div className="container-xxl">
+            <div className="row">
+              <div className="col-12">
+                <p className="text-center mb-0 text-white">
+                  &copy; 2025 Designed and Developed by Felicia
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+            <li class="ms-3"><a class="text-body-secondary" href="#" aria-label="Instagram"><svg class="bi" width="24" height="24" aria-hidden="true"><use xlink:href="#instagram"></use></svg></a></li>
+            <li class="ms-3"><a class="text-body-secondary" href="#" aria-label="Facebook"><svg class="bi" width="24" height="24"><use xlink:href="#facebook"></use></svg></a></li>
+          </ul> */}
+        </footer>
+      </div>
       {/* <footer className="py-4 bg-dark mt-5">
         <div className="container-xxl">
           <div className="row align-items-center">
@@ -33,8 +58,8 @@ function Footer() {
           </div>
         </div>
       </footer> */}
-      <div className="footer-css">
-        <footer className="py-4 bg-dark mt-3 mb-0">
+      {/* <div className="footer-css">
+        <footer className="py-4 bg-dark mb-0">
           <div className="container-xxl">
             <div className="row justify-content-center d-flex ">
               <div className="col-5">
@@ -103,7 +128,7 @@ function Footer() {
             </div>
           </div>
         </footer>
-      </div>
+      </div> */}
     </>
   );
 }

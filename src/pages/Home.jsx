@@ -5,6 +5,7 @@ import {  getAllProducts } from "../features/products/productSlice";
 import Carousel from 'react-bootstrap/Carousel';
 import '../extras/extracss/Home.css';
 import { Container, Button} from 'react-bootstrap';
+import {colors} from '../theme.js'
 
 
 function Home() {
@@ -31,8 +32,8 @@ function Home() {
   const handleSelect = (selectedIndex) => {
     setIndex(selectedIndex);
   };
-  return (
-    <>
+  return  (
+    <div style={{backgroundColor:colors.body}}>
       <div className='mx-auto carousal'>
         <Carousel activeIndex={index} onSelect={handleSelect} className='carousal-comp'>
           {product && product.map((item, index) => {
@@ -56,9 +57,9 @@ function Home() {
       </div>
 
       <Container className="featured-wrapper pt-5 px-4 home-wrapper-2">
-        <div className="row">
+        <div className="row pb-5">
           <div className="col-12">
-            <h3 className="section-heading">Featured Collection</h3>
+            <h3 className="section-heading fw-bold">Featured Collection</h3>
           </div>
           {product &&
             product?.map((item, index) => {
@@ -91,7 +92,7 @@ function Home() {
             <Button style={{width:"fit-content"}} className="d-flex m-auto" onClick={()=>navigate("/product")}>See more Products</Button>
         </div>    
       </Container>
-    </>
+    </div>
   );
 }
 

@@ -7,13 +7,15 @@ import { auth_reset } from "../features/user/userSlice.js";
 import { search_reset } from "../features/products/productSlice.js";
 import '../extras/extracss/Topbar.css'
 import Logo from "../extras/mini components/Logo/Logo.jsx";
-import { Dropdown } from "react-bootstrap";
+import { Dropdown, Image } from "react-bootstrap";
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
+import {colors, fonts} from '../theme.js'
+
 
 function Header() {
   const [total, setTotal] = useState(null);
@@ -21,6 +23,7 @@ function Header() {
   const dispatch = useDispatch();
   const authState = useSelector((state) => state.auth);
   const [user, setUser] = useState(authState?.user);
+  const searchVal = useSelector((state) => state.product.search);
 
   const cartState = useSelector((state) => state?.auth?.cartProduct);
   useEffect(() => {
@@ -62,42 +65,78 @@ function Header() {
   };
   return (
     <>
-      <Navbar expand="lg" className="">
-        <Container>
-          <Navbar.Brand href="#"><Logo /></Navbar.Brand>
-          <Form>
-            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-              <Form.Label>Search</Form.Label>
-              <Form.Control type="text" placeholder="Search Something..." onChange={handleSearch}/>
+      <Navbar expand="lg" className="fixed" 
+        style=
+          {{
+            backgroundColor:colors.header, 
+            position:'static', 
+            zIndex:100, 
+            width:'100%',
+            boxShadow: '0px 2px 5px rgba(0, 0, 0, 0.1)',
+            height:"11vh"
+            }} >
+        <Container fluid className="mx-5 px-5">
+          <Navbar.Brand href="#" className="me-lg-5"><Logo /></Navbar.Brand>
+          {
+            user &&
+            <Form>
+            <Form.Group className="" controlId="exampleForm.ControlInput1" style={{borderBottom:"2px solid black"}}>
+              {/* <Form.Label>Search</Form.Label> */}
+              <Form.Control 
+                type="text" 
+                placeholder="Search Something..." 
+                onChange={handleSearch}
+                style={{
+                  boxShadow: 'none', // Remove the shadow on focus
+                  borderColor: 'transparent', // Optional: Remove the border on focus
+                  fontSize: '20px',
+                  maxWidth: '1000px',
+                  backgroundColor:colors.header,
+                  borderBottom: "2px soild green"
+                }}
+                value={searchVal}
+                />
             </Form.Group>
           </Form>
+          }
           <Navbar.Toggle aria-controls="responsive-navbar-nav" ref={navbarRef}/>
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="ms-auto my-2 my-lg-0 d-flex align-items-center gap-2 navtext">
-              <Nav.Link onClick={() => navigate('/')} onTouchEnd={()=>collapseIt()}>
+              <Nav.Link onClick={() => {
+                dispatch(search_reset(""))
+                navigate('/')
+                }} onTouchEnd={()=>collapseIt()} style={fonts.headerFont}>
                 {
-                  user ? "Home" : "Login"
+                  user && "Home"
                 }
               </Nav.Link>
-              <Nav.Link onClick={() => navigate('/product')} onTouchEnd={()=>collapseIt()}>All Products</Nav.Link>
+              {
+                user &&   <Nav.Link onClick={() => {
+                  dispatch(search_reset(""))
+                  navigate('/product')}} style={fonts.headerFont} onTouchEnd={()=>collapseIt()}>All Products</Nav.Link>
+              }
               {
                 user && (
-                  <Nav.Link onClick={() => navigate('/myorders')} onTouchEnd={()=>collapseIt()}>My Orders</Nav.Link>
+                  <Nav.Link onClick={() => {
+                    dispatch(search_reset(""))
+                    navigate('/myorders')}} style={fonts.headerFont} onTouchEnd={()=>collapseIt()}>My Orders</Nav.Link>
                 )
               }
               {
               user && (
-              <Nav.Link onClick={() => navigate('/cart')} className="d-flex flex-column justify-content-center align-items-center" onTouchEnd={()=>collapseIt()}>
+              <Nav.Link onClick={() => {
+                dispatch(search_reset(""))
+                navigate('/cart')}} className="d-flex flex-column justify-content-center align-items-center" onTouchEnd={()=>collapseIt()}>
                 <BsCart4 className="header-icon m-0 p-0 gap-0" />
-                <div className="m-0 p-0 cartletter">Cart</div>
+                <div className="m-0 p-0 cartletter" style={fonts.headerFont}>Cart</div>
               </Nav.Link>
               )
               }
               {
-              user && (
+              user ? (
               <Dropdown align="end">
                 <Dropdown.Toggle variant="link" id="dropdown-basic" drop="down" className="acc-btn custom-dropdown-toggle">
-                  <div className="d-flex align-items-center gap-20 text-dark">
+                  <div className="d-flex align-items-center gap-20 text-dark" style={fonts.headerFont}>
                     <BiUserCircle className="header-icon-login m-0 p-0 "/>
                     {user === null ? (
                       <p className="mb-0  loginbutton">
@@ -118,7 +157,16 @@ function Header() {
               )
                 }
               </Dropdown>
-              )}
+              ) :
+              <div style={{height:'10vh', width:'10vh'}}>
+              <Image 
+              src="../../assets/headerLeaf.png" 
+              alt="Description of image" 
+              rounded 
+              fluid // makes the image responsive
+              style={{ maxWidth: '100%'}} 
+            />
+            </div>}
 
             </Nav>
           </Navbar.Collapse>
