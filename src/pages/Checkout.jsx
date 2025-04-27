@@ -65,8 +65,22 @@ function Checkout() {
       phone: "",
     },
     validationSchema: shippingSchema,
-    onSubmit: (values) => {
+    onSubmit: async (values) => {
+      if (!formik.isValid) {
+        // Mark all fields as touched to show errors
+        formik.setTouched({
+          firstname: true,
+          lastname: true,
+          address: true,
+          email: true,
+          pincode: true,
+          phone: true,
+        });
+        return; // Don't continue if form is invalid
+      }
+    
       console.log("shipping form values:", CartProductState);
+    
       dispatch(
         createAnOrder({
           totalPrice: totalAmount,
@@ -75,7 +89,8 @@ function Checkout() {
           shippingInfo: { values },
         })
       );
-    },
+    }
+    
   });
 
   useEffect(() => {
@@ -128,7 +143,7 @@ function Checkout() {
       key: "rzp_test_zEYfygsbq3teOk",
       amount: amount,
       currency: currency,
-      name: "Shopper.",
+      name: "Auraluxe.",
       description: "Test Transaction",
 
       order_id: order_id,
@@ -157,12 +172,12 @@ function Checkout() {
         navigate("/myorders");
       },
       prefill: {
-        name: "Shopper",
+        name: "Auraluxe",
         email: userState.email,
         contact: formik.values.phone,
       },
       notes: {
-        address: "Shopper Private Limited",
+        address: "Auraluxe Private Limited",
       },
       theme: {
         color: "#61dafb",
@@ -180,7 +195,7 @@ function Checkout() {
           <div className="row">
             <div className="col-12 col-lg-6">
               <div className="checkout-left-data">
-                <h3 className="website-name mb-2">Shopper</h3>
+                <h3 className="website-name mb-2">Auraluxe</h3>
                 <div className="d-flex gap-3">
                   <p className="">E-Mail: </p>
                   <p className="">
@@ -352,7 +367,7 @@ function Checkout() {
                         <div></div>
                         <div className="flex-grow-1 ms-4">
                           <h5 className="total">
-                            ${item?.price * item?.quantity}
+                          ₹ {item?.price * item?.quantity}
                           </h5>
                         </div>
                       </div>
@@ -362,25 +377,25 @@ function Checkout() {
                   <div className="d-flex justify-content-between align-items-center">
                     <p className="total">Subtotal</p>
                     <p className="total-price">
-                      $ {totalAmount ? totalAmount : "0"}
+                    ₹ {totalAmount ? totalAmount : "0"}
                     </p>
                   </div>
                   <div className="d-flex justify-content-between align-items-center">
                     <p className="mb-0 total">Shipping</p>
-                    <p className="mb-0 total-price">$ 10</p>
+                    <p className="mb-0 total-price">₹ 10</p>
                   </div>
                 </div>
                 <div className="d-flex justify-content-between align-items-center border-bottom py-4">
                   <h4 className="total">Total</h4>
                   <h5 className="total-price">
-                    $ {totalAmount ? totalAmount + 10 : "0"}
+                  ₹ {totalAmount ? totalAmount + 10 : "0"}
                   </h5>
                 </div>
               </div>
               <div className="mt-3 d-flex justify-content-center gap-15 align-items-center">
                 <button
                   className="button border-0 placeorder-btn"
-                  disabled={!(formik.dirty && formik.isValid)}
+                  // disabled={!(formik.dirty && formik.isValid)}
                   type="submit"
                 >
                   Place Order

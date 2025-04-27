@@ -46,7 +46,7 @@ function MyOrder() {
                     <td>{item?.createdAt?.split("T")?.[0]}</td>
                     <td>{item?._id}</td>
                     <td>{item?.orderItems?.length}</td>
-                    <td>$ {item?.totalPrice.toFixed(2)}</td>
+                    <td>₹ {item?.totalPrice.toFixed(2)}</td>
                   </tr>
                 );
               })}

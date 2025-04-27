@@ -99,7 +99,7 @@ function Header() {
             </Form.Group>
           </Form>
           }
-          {location.pathname !== "/login" || location.pathname !== "/sign-up" && (
+          {location.pathname !== "/login" && location.pathname !== "/sign-up" && (
             <Navbar.Toggle aria-controls="responsive-navbar-nav" className="mx-auto d-md-none mt-2" ref={navbarRef} />
           )}
           <Navbar.Collapse id="responsive-navbar-nav">

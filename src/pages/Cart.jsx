@@ -11,17 +11,26 @@ import {colors} from '../theme.js'
 
 function Cart() {
   const dispatch = useDispatch();
+  const [deletingItemId, setDeletingItemId] = useState(null);
   const userCartState = useSelector((state) => state?.auth?.cartProduct);
   console.log(userCartState)
   useEffect(() => {
     dispatch(getUserCart());
   }, []);
   const deleteACartProduct = (id) => {
-    dispatch(deleteCartPoduct(id));
-    setTimeout(() => {
-      dispatch(getUserCart());
-    }, 200);
+    setDeletingItemId(id); // Start loading
+    dispatch(deleteCartPoduct(id))
+      .then(() => {
+        setTimeout(() => {
+          dispatch(getUserCart());
+          setDeletingItemId(null); // Stop loading
+        }, 200);
+      })
+      .catch(() => {
+        setDeletingItemId(null); // Also stop loading on error
+      });
   };
+  
   const [totalAmount, setTotalAmount] = useState(null);
   useEffect(() => {
     let sum = 0;
@@ -40,7 +49,7 @@ function Cart() {
      
       <div className="pt-5" style={{minHeight:'90vh', backgroundColor:colors.body }}>
       <Container fluid className="px-5">
-        <Table responsive  style={{minHeight:'60vh', backgroundColor:colors.bod }}>
+        <Table responsive  style={{ backgroundColor:colors.body }}>
           <thead style={{backgroundColor:colors.body}}>
             <tr style={{backgroundColor:colors.body}}>
               <th style={{backgroundColor:colors.body}}>S.No</th>
@@ -73,25 +82,33 @@ function Cart() {
               <p>{item?.productId.title}</p>
             </div>
           </td>
-          <td  style={{backgroundColor:colors.body}}><h5 className="Price">$ {item?.productId.price}</h5></td>
+          <td  style={{backgroundColor:colors.body}}><h5 className="Price">₹ {item?.productId.price}</h5></td>
+          <td style={{ backgroundColor: colors.body }}>
+  <div className="d-flex align-items-center gap-2">
+    <input
+      className="form-control"
+      type="number"
+      min={1}
+      max={10}
+      value={item?.quantity}
+      disabled
+    />
+    {deletingItemId === item._id ? (
+      <div className="spinner-border text-danger" style={{ width: "1.5rem", height: "1.5rem" }} role="status">
+        <span className="visually-hidden">Loading...</span>
+      </div>
+    ) : (
+      <AiFillDelete
+        onClick={() => deleteACartProduct(item?._id)}
+        className="text-danger pointer"
+        style={{ cursor: deletingItemId ? "not-allowed" : "pointer" }}
+      />
+    )}
+  </div>
+</td>
+
           <td  style={{backgroundColor:colors.body}}>
-            <div className="d-flex align-items-center gap-2">
-              <input
-                className="form-control"
-                type="number"
-                min={1}
-                max={10}
-                value={item?.quantity}
-                disabled
-              />
-              <AiFillDelete
-                onClick={() => deleteACartProduct(item?._id)}
-                className="text-danger pointer"
-              />
-            </div>
-          </td>
-          <td  style={{backgroundColor:colors.body}}>
-            <h5 className="Price">$ {item?.quantity * item?.price}</h5>
+            <h5 className="Price">₹ {item?.quantity * item?.price}</h5>
           </td>
         </tr>
       );
@@ -112,10 +129,10 @@ function Cart() {
                   <Link to="/product" className="button prime-btn">
                     Continue to Shopping
                   </Link>
-                  {(totalAmount !== null || totalAmount !== 0) && (
+                  {(totalAmount !== null && totalAmount !== 0 &&  userCartState.length>0 ) && (
                     <div className="d-flex flex-column align-items-end">
-                      <h5> SubTotal :$ {totalAmount}</h5>
-                      <Link to="/checkout" className="button sec-btn">
+                      <h5> SubTotal :₹ {totalAmount}</h5>
+                      <Link to="/checkout" className="button sec-btn" style={{backgroundColor:'#daa520'}}>
                         Checkout
                       </Link>
                     </div>
