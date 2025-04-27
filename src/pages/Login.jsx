@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../features/user/userSlice";
 import "../extras/extracss/Login.css"
 import { Image } from "react-bootstrap";
+import loginPageImage from "../../assets/pexels-polina-kovaleva-5420491.jpg"; 
 
 const loginSchema = Yup.object({
   email: Yup.string()
@@ -54,7 +55,7 @@ function Login() {
             <div className="auth-card" style={{display:'flex', flexDirection:'column', justifyContent:'center', alignItems:'center' }}>
               <h3 className="text-center mb-3 fw-bold fs-2" style={{color:"black"}}>Login</h3>
               <Image 
-              src="../../assets/pexels-polina-kovaleva-5420491.jpg" 
+              src={loginPageImage}
               alt="Description of image" 
               rounded 
               fluid // makes the image responsive

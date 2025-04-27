@@ -7,22 +7,35 @@ export const registerUser = createAsyncThunk(
   "auth/register",
   async (userData, thunkAPI) => {
     try {
-      return await authService.register(userData);
+      const response = await authService.register(userData);
+
+      // After successful registration, automatically log the user in
+      await thunkAPI.dispatch(loginUser(userData));  // Dispatch login action
+
+      return response;
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
   }
 );
+
 export const loginUser = createAsyncThunk(
   "auth/login",
   async (userData, thunkAPI) => {
     try {
-      return await authService.login(userData);
+      const response = await authService.login(userData);
+
+      // After a successful login, store the token and user info
+      localStorage.setItem("token", response.token);
+      localStorage.setItem("customer", JSON.stringify(response));
+      
+      return response;
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
   }
 );
+
 export const getUserProductWishlist = createAsyncThunk(
   "user/wishlist",
   async (thunkAPI) => {

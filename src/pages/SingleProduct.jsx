@@ -45,9 +45,9 @@ function SingleProduct() {
         price: productState?.price,
       })
     );
-    setTimeout(() => {
-      navigate("/cart");
-    }, 2000);
+    // setTimeout(() => {
+    //   navigate("/cart");
+    // }, 2000);
   };
   const props = {
     width: 400,
@@ -80,7 +80,7 @@ function SingleProduct() {
             </div>
             <hr className="w-100 mt-1" />
             <h6 className="fw-bold">
-              Price: $ {productState?.price}
+              Price: ₹ {productState?.price}
             </h6>
             <p style={{ fontSize: "0.8em" }}>Inclusive of all Taxes</p>
             <hr className="w-100 mt-1" />
@@ -122,7 +122,7 @@ function SingleProduct() {
           </Col>
 
           <Col className='border p-3 py-4' style={{ height: '100%' }}>
-            <h4 className="fw-bold pt-2">Price: $ {productState?.price}</h4>
+            <h4 className="fw-bold pt-2">Price: ₹ {productState?.price}</h4>
             <h6 className="pb-4">Free Delivery</h6>
             {
               alreadyAdded === false && (

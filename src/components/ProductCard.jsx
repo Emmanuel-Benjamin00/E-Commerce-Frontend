@@ -56,7 +56,7 @@ function ProductCard(props) {
                     {/* {grid === 12 && (
                       <p className="description">{item?.description}</p>
                     )} */}
-                    <p className="Price">${item?.price}</p>
+                    <p className="Price">₹{item?.price}</p>
                   </Link>
                 </div>
               </div>

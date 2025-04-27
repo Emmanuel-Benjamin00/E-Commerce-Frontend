@@ -15,6 +15,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import {colors, fonts} from '../theme.js'
+import leafImage from "../../assets/headerLeaf.png"; 
 
 
 function Header() {
@@ -162,7 +163,7 @@ function Header() {
               ) :
               <div className="d-none d-md-block" style={{height:'10vh', width:'10vh'}}>
               <Image 
-              src="../../assets/headerLeaf.png" 
+              src={leafImage}
               alt="Description of image" 
               rounded 
               fluid // makes the image responsive
