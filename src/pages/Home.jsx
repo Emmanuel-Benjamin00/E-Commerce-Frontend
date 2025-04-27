@@ -57,7 +57,7 @@ function Home() {
       </div>
 
       <Container className="featured-wrapper pt-5 px-4 home-wrapper-2">
-        <div className="row pb-5">
+        <div className="row pb-5" style={{minHeight:'50vh'}}>
           <div className="col-12">
             <h3 className="section-heading fw-bold">Featured Collection</h3>
           </div>
@@ -65,13 +65,14 @@ function Home() {
             product?.map((item, index) => {
               if (item?.tags === "feature") {
                 return (
-                  <div key={index} className="col-6 col-lg-3 mb-5">
-                    <div className="product-card card position-relative">
+                  <div key={index} className="col-12 col-lg-3 mb-5">
+                    <div className="product-card card position-relative border-none"  style={{ backgroundColor:colors.body}}>
                       <Link
                         to={`/product/${item._id}`}
                         className="product-details"
+                      
                       >
-                        <div className="product-image d-flex align-items-center">
+                        <div className="product-image d-flex align-items-center" >
                           <img
                             src={item?.images?.[0]?.url}
                             className="img-fluid d-block mx-auto featured-img"

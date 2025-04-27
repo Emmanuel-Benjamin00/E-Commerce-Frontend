@@ -73,7 +73,7 @@ function Header() {
             zIndex:100, 
             width:'100%',
             boxShadow: '0px 2px 5px rgba(0, 0, 0, 0.1)',
-            height:"11vh"
+            height:"auto",
             }} >
         <Container fluid className="mx-5 px-5">
           <Navbar.Brand href="#" className="me-lg-5"><Logo /></Navbar.Brand>
@@ -99,7 +99,9 @@ function Header() {
             </Form.Group>
           </Form>
           }
-          <Navbar.Toggle aria-controls="responsive-navbar-nav" ref={navbarRef}/>
+          {location.pathname !== "/login" || location.pathname !== "/sign-up" && (
+            <Navbar.Toggle aria-controls="responsive-navbar-nav" className="mx-auto d-md-none mt-2" ref={navbarRef} />
+          )}
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="ms-auto my-2 my-lg-0 d-flex align-items-center gap-2 navtext">
               <Nav.Link onClick={() => {
@@ -158,7 +160,7 @@ function Header() {
                 }
               </Dropdown>
               ) :
-              <div style={{height:'10vh', width:'10vh'}}>
+              <div className="d-none d-md-block" style={{height:'10vh', width:'10vh'}}>
               <Image 
               src="../../assets/headerLeaf.png" 
               alt="Description of image" 

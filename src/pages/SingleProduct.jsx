@@ -85,10 +85,10 @@ function SingleProduct() {
             <p style={{ fontSize: "0.8em" }}>Inclusive of all Taxes</p>
             <hr className="w-100 mt-1" />
             <div>
-              <div className="d-flex gap-10 align-items-center my-2">
+              {/* <div className="d-flex gap-10 align-items-center my-2">
                 <label className="product-heading">Type</label>
                 <label className="product-data">Watch</label>
-              </div>
+              </div> */}
               <div className="d-flex gap-10 align-items-center my-2">
                 <label className="product-heading">Brand</label>
                 <label className="product-data">
@@ -164,7 +164,7 @@ function SingleProduct() {
         <div className="row description-wrapper px-5 mt-4">
           <div>
             <h6 className="fw-bold fs-3">Description</h6>
-            <div className="bg-white">
+            <div className="">
               <p className="text-justify fs-5"  style={{backgroundColor:colors.body}}>{productState?.description}</p>
             </div>
           </div>

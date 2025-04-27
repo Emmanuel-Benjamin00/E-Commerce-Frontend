@@ -306,9 +306,9 @@ function Checkout() {
                             <BiArrowBack className="mt-2" />
                             Return to Cart
                           </Link>
-                          <Link to="/" className="button fw-bold text-success">
+                          {/* <Link to="/" className="button fw-bold text-success">
                             Continue to shopping
-                          </Link>
+                          </Link> */}
                         </div>
                       </div>
                     </div>

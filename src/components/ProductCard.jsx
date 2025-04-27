@@ -4,10 +4,10 @@ import { Link, useLocation } from "react-router-dom";
 import {colors} from '../theme.js'
 
 function ProductCard(props) {
-  let location = useLocation();
+  const location = useLocation();
   const { grid, data } = props;
   const searchVal = useSelector((state) => state.product.search);
-  let [productData, setProductData] = useState(data);
+  const [productData, setProductData] = useState(data);
 
   useEffect(() => {
     if (searchVal) {
@@ -21,55 +21,52 @@ function ProductCard(props) {
   }, [searchVal, data]);
 
   return (
-    <div className="row g-3 mt-5">
-      {productData?.map((item, index) => {
-        if (item?.tags !== "upcoming") {
-          return (
-            <div
-              key={index}
-              className={`col-6 col-lg-3 mb-5`} 
-            >
-              <div className="product-card card position-relative" 
-                  style={{
-                    backgroundColor:colors.body, 
-                    border: "none",
-                    boxShadow: "0 8px 16px rgba(0, 0, 0, 0.4)",  // Add shadow for elevation
-                    transition: "all 0.3s ease",  // Smooth transition on hover
-                    }}>
-                <Link
-                  to={`${
-                    location.pathname === "/"
-                      ? `/product/${item._id}`
-                      : location.pathname === `/product/${item._id}`
-                      ? `/product/${item._id}`
-                      : `${item._id}`
-                  }`}
-                  className="product-details"
-                >
-                  <div className="product-image d-flex align-items-center">
-                    <img
-                      src={item?.images?.[0]?.url}
-                      className="img-fluid d-block mx-auto featured-img"
-                      alt="product-img"
-                      style={{ maxHeight: "100%", maxWidth: "100%" }}
-                    />
-                  </div>
-
-                  <h6 className="brand">{item?.brand?.title}</h6>
-                  <h5 className="product-title">{item?.title}</h5>
-                  {/* Hide description in Featured style */}
-                  {grid === 12 && (
-                    <p className="description d-block">{item?.description}</p>
-                  )}
-                  <p className="Price fw-bold text-dark">$ {item?.price}</p>
-                </Link>
+    <div className="product-card-container">
+      {productData?.length === 0 ? (
+        <div style={{ textAlign: "center", width: "100%", marginTop: "50px" }}>
+          <h4>No Products to Show</h4>
+        </div>
+      ) : (
+        productData?.map((item, index) => {
+          if (item?.tags !== "upcoming") {
+            return (
+              <div key={index} className="product-card-wrapper" style={{ minWidth: '30vh' }}>
+                <div className="product-card" style={{ backgroundColor: colors.body, display: "flex", justifyContent: "center", alignItems: "center" }}>
+                  <Link
+                    to={`${
+                      location.pathname === "/"
+                        ? `/product/${item._id}`
+                        : location.pathname === `/product/${item._id}`
+                        ? `/product/${item._id}`
+                        : `${item._id}`
+                    }`}
+                    className="product-details"
+                  >
+                    <div className="product-image mb-3">
+                      <img
+                        src={item?.images?.[0]?.url}
+                        className="img-fluid"
+                        alt="product-img"
+                        style={{ height: "100%" }}
+                      />
+                    </div>
+  
+                    <h6 className="brand">{item?.brand?.title}</h6>
+                    <h5 className="product-title">{item?.title}</h5>
+                    {/* {grid === 12 && (
+                      <p className="description">{item?.description}</p>
+                    )} */}
+                    <p className="Price">${item?.price}</p>
+                  </Link>
+                </div>
               </div>
-            </div>
-          );
-        }
-      })}
-      </div>
+            );
+          }
+        })
+      )}
+    </div>
   );
+  
 }
 
 export default ProductCard;
