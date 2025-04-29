@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { registerUser } from "../features/user/userSlice";
 import { Link, useNavigate } from "react-router-dom";
 import { Image, Spinner } from "react-bootstrap"; // Import Spinner for loading
+import signupPageImage from "../../assets/pexels-polina-kovaleva-5420491.jpg"
 
 const signupSchema = Yup.object({
   firstname: Yup.string().required("First Name is required "),
@@ -71,7 +72,7 @@ function Signup() {
                 Sign-Up
               </h3>
               <Image
-                src="../../assets/pexels-polina-kovaleva-5420491.jpg"
+                src={signupPageImage}
                 alt="Description of image"
                 rounded
                 fluid
