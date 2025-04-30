@@ -3,12 +3,28 @@ import { base_url, getConfig } from "../../utils/axiosConfig";
 
 const register = async (userData) => {
   console.log("register Req: ", userData);
-  const response = await axios.post(`${base_url}user/register`, userData);
-  console.log("register Response: ", response);
-  if (response?.data) {
-    return response.data;
+  
+  try {
+    // Sending request with withCredentials to include cookies or authentication headers
+    const response = await axios.post(
+      `${base_url}user/register`,
+      userData,
+      { withCredentials: true } // Ensure credentials (cookies) are sent with the request
+    );
+    
+    console.log("register Response: ", response);
+
+    // If the response has data, return it
+    if (response?.data) {
+      return response.data;
+    }
+
+  } catch (error) {
+    console.error("Error during registration: ", error);
+    return { error: true, message: error.response?.data?.message || error.message };
   }
 };
+
 const login = async (userData) => {
   const response = await axios.post(`${base_url}user/login`, userData);
   if (response?.data) {
