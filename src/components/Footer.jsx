@@ -71,7 +71,7 @@ function Footer() {
                   <div
                     className="text-white"
                   >
-                    +91 6379461396
+                    +91 6379461897
                   </div>
                   <div
                     className=" text-white"
