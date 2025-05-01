@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { BsLinkedin, BsGithub, BsYoutube, BsInstagram } from "react-icons/bs";
+import { BsLinkedin, BsGithub, BsYoutube, BsInstagram,BsChatDots } from "react-icons/bs";
 import "../extras/extracss/Footer.css"
 
 import { BsSendArrowUp } from "react-icons/bs";
@@ -79,11 +79,23 @@ function Footer() {
                     entrepreneurship7298@gmail.com
                   </div>
 
-                  {/* <div className="">
-                    <a className="text-white">
+                  <div className="">
+                  <a href="https://www.youtube.com/@Entrepreneur7298" target="_blank" rel="noopener noreferrer" className="text-white">
                       <BsYoutube className="fs-3" />
                     </a>
-                  </div> */}
+                  </div>
+
+                  <div className="">
+                  <a href="https://www.instagram.com/aura_luxe20?utm_source=qr&igsh=MjUweXUzM2ZqZ3l3" target="_blank" rel="noopener noreferrer" className="text-white">
+                      <BsInstagram className="fs-3" />
+                    </a>
+                  </div>
+
+                  <div className="">
+                  <a href="https://docs.google.com/forms/d/e/1FAIpQLSeyxEgamPl-xvQNbJvZX2Z7vK-2UGg62QR8fn7e2Emx12MwAQ/viewform?usp=sharing" target="_blank" rel="noopener noreferrer" className="text-white">
+                      <BsChatDots className="fs-3" />
+                    </a>
+                  </div>
 
                 </div>
               </div>
