@@ -83,6 +83,7 @@ function OurStore() {
       <Container class1="store-wrapper py-5" style={{minHeight:'80vh'}}>
         <div className="row" style={{minHeight:'80vh'}}>
           <h3 className="text-center fw-bold mb-4">All Products</h3>
+          <h4 className="text-center fw-bold mb-4" style={{color:"#555555"}}>"Want something unique? Customize your soap in fun shapes like a teddy bear! Contact us to create your personalized soap today."</h4>
           <div className="col-12">
             <div className="products-list">
               <div className="product-grid">
